@@ -1,0 +1,19 @@
+module tb_magnitude_comparator;
+    logic [3:0] A, B;
+    logic A_greater, A_equal, A_less;
+
+    magnitude_comparator uut (A, B, A_greater, A_equal, A_less);
+
+    initial begin
+        $monitor("A=%b B=%b | A_greater=%b A_equal=%b A_less=%b", A, B, A_greater, A_equal, A_less);
+
+        // Test Cases
+        A = 4'b1010; B = 4'b1001; #10; // A > B
+        A = 4'b1100; B = 4'b1100; #10; // A == B
+        A = 4'b0011; B = 4'b0110; #10; // A < B
+        A = 4'b0000; B = 4'b0001; #10; // A < B
+        A = 4'b1111; B = 4'b0000; #10; // A > B
+
+        $finish;
+    end
+endmodule
